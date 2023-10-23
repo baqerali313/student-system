@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h1>Student Table</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                  <th>Age</th>
+                <th>Class</th>
+                <th>City</th>
+                <th>Edit Name</th>
+                <th>Delete Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for st in student %}
+            <tr>
+                <th scope="row">{{ st.id }}</th>
+                <td>{{ st.name }}</td>
+                 <td>{{ st.age }}</td>
+                 <td>{{ st.class_st }}</td>
+                 <td>{{ st.city }}</td>
+                <th>
+                    <form action="{% url 'update' st.id %}" method="post">
+                        {% csrf_token %}
+
+                        <input type="submit" value="Edit">
+                    </form>
+                </th>
+                
+                
+                <th>
+                    <form action="{% url 'delete' st.id %}" method="post" >
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<button><a href="{% url 'home' %}">Home</a></button>
+</body>
+</html>
